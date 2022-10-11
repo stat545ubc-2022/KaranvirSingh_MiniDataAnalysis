@@ -153,33 +153,29 @@ comments outside of the code chunk?
 *Exploring the cancer sample dataset*
 
 ```{r}
+# Glimpse gives the number of rows, number of columns, column names and the first few rows of each column
 glimpse(cancer_sample)
-colnames(cancer_sample)
-DT::datatable(cancer_sample)
 ```
 
 *Exploring the parking meters dataset*
 
 ```{r}
+# Glimpse gives the number of rows, number of columns, column names and the first few rows of each column
 glimpse(parking_meters)
-colnames(parking_meters)
-head(parking_meters)
 ```
 
 *Exploring the apartment buildings dataset*
 
 ```{r}
+# Glimpse gives the number of rows, number of columns, column names and the first few rows of each column
 glimpse(apt_buildings)
-colnames(apt_buildings)
-DT::datatable(apt_buildings)
 ```
 
 *Exploring the building permits dataset*
 
 ```{r}
+# Glimpse gives the number of rows, number of columns, column names and the first few rows of each column
 glimpse(building_permits)
-colnames(building_permits)
-DT::datatable(building_permits)
 ```
 
 <!----------------------------------------------------------------------------->
@@ -420,7 +416,8 @@ building_permits %>% filter(project_value >0) %>%
   ggtitle("bin size = 30")+
   theme_minimal()
 
-# Trying setting the bins to 50. This looks the best out of the three options I tested, the bins are big enough to still be interpretable (100 makes the bins really small, 30 too big)
+# Trying setting the bins to 50. This looks the best out of the three options I tested,
+# the bins are big enough to still be interpretable (100 makes the bins really small, 30 too big)
 
 building_permits %>% filter(project_value >0) %>%
   filter(type_of_work == "New Building") %>%
@@ -453,7 +450,7 @@ building_permits %>% filter(project_value > 0) %>%
                                                           sd = sd(project_value, na.rm=TRUE),
                                                           median = median(project_value, na.rm=TRUE))
 
-#Step 2 - plot project value versus year for new buildings. This is useful in answering the research question (it is the same data as the histograms, but as boxplots). 
+#Step 3 - plot project value versus year for new buildings. This is useful in answering the research question (it is the same data as the histograms, but as boxplots). 
 building_permits %>% filter(project_value >0) %>%
   filter(type_of_work == "New Building") %>%
   ggplot(aes(x=factor(year), y=project_value))+
