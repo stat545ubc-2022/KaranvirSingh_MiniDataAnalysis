@@ -696,11 +696,16 @@ new_one_family <- building_permits %>% filter(specific_use_category== "One-Famil
             max_project_value = max(project_value, na.rm=TRUE),
             frequency = n())
 
-DT::datatable(new_one_family)
+print(new_one_family)
 ```
 
-<div id="htmlwidget-84819caae7e831011e79" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-84819caae7e831011e79">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4"],[2017,2018,2019,2020],[949481.38225256,920379.366051661,1022927.42768817,989036.353773585],[4500000,6295000,8000000,3125000],[293,271,186,53]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>mean_project_value<\/th>\n      <th>max_project_value<\/th>\n      <th>frequency<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+    ## # A tibble: 4 × 4
+    ##    year mean_project_value max_project_value frequency
+    ##   <dbl>              <dbl>             <dbl>     <int>
+    ## 1  2017            949481.           4500000       293
+    ## 2  2018            920379.           6295000       271
+    ## 3  2019           1022927.           8000000       186
+    ## 4  2020            989036.           3125000        53
 
 ``` r
 # Plotting the data as a scatterplot to show that new building permits intended for single-family use have been declining over the years. 
@@ -713,7 +718,7 @@ new_one_family %>% ggplot(aes(x=year, y=frequency))+
   theme_minimal()
 ```
 
-![](mini-project-1_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
+![](mini-project-1_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 The number of permits for single-family new building has decreased
 between 2017-2020.

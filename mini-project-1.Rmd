@@ -518,7 +518,7 @@ new_one_family <- building_permits %>% filter(specific_use_category== "One-Famil
             max_project_value = max(project_value, na.rm=TRUE),
             frequency = n())
 
-DT::datatable(new_one_family)
+print(new_one_family)
 
 # Plotting the data as a scatterplot to show that new building permits intended for single-family use have been declining over the years. 
 new_one_family %>% ggplot(aes(x=year, y=frequency))+
