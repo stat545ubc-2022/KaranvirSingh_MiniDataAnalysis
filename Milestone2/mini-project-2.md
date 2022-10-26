@@ -319,7 +319,8 @@ building_permits %>%
 
 **For this task, I am going to combine the “salvage and abatement” and
 “demolition and destruction” factors into one group, since they are very
-closely related in practice.**
+closely related in practice. Now all entries in these two groups are
+plotted together under the same category (“Demolition”).**
 
 ``` r
 building_permits %>%
