@@ -96,8 +96,8 @@ pick 8, and explain whether the data is untidy or tidy.
 
 <!--------------------------- Start your work below --------------------------->
 
-The data is tidy - each row is an observation and each column is a
-variable. Each cell is a value.
+**The data is tidy - each row is an observation and each column is a
+variable. Each cell is a value.**
 <!----------------------------------------------------------------------------->
 
 ### 2.2 (5 points)
@@ -113,9 +113,9 @@ and “after”.
 
 <!--------------------------- Start your work below --------------------------->
 
-I am going to untidy my data - to do this, I am going to combine two
+**I am going to untidy my data - to do this, I am going to combine two
 columns together (the applicant and the year). Now I have one column
-that contains two variables, which is untidy.
+that contains two variables, which is untidy.**
 
 ``` r
 buildings_untidy <- building_permits %>% unite(col="applicant_year", c("applicant", "year"), sep="_")
@@ -138,14 +138,33 @@ glimpse(buildings_untidy)
     ## $ specific_use_category       <chr> "One-Family Dwelling", "Multiple Dwelling"…
     ## $ bi_id                       <dbl> 524, 535, 539, 541, 543, 546, 547, 548, 54…
 
-To tidy it again, I am going to separate the two columns back into year
-and applicant.
+**To tidy it again, I am going to separate the two columns back into
+year and applicant.**
 
 ``` r
 type_of_work_vector <- unique(building_permits$type_of_work)
 
 buildings_tidy <- buildings_untidy %>% separate(col="applicant_year", into=c("applicant", "year"), sep="_")
+
+glimpse(buildings_tidy)
 ```
+
+    ## Rows: 20,680
+    ## Columns: 14
+    ## $ permit_number               <chr> "BP-2016-02248", "BU468090", "DB-2016-0445…
+    ## $ issue_date                  <date> 2017-02-01, 2017-02-01, 2017-02-01, 2017-…
+    ## $ project_value               <dbl> 0, 0, 35000, 15000, 181178, 0, 15000, 0, 6…
+    ## $ type_of_work                <chr> "Salvage and Abatement", "New Building", "…
+    ## $ address                     <chr> "4378 W 9TH AVENUE, Vancouver, BC V6R 2C7"…
+    ## $ project_description         <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ building_contractor         <chr> NA, NA, NA, "Mercury Contracting Ltd", "08…
+    ## $ building_contractor_address <chr> NA, NA, NA, "88 W PENDER ST  \r\nUnit 2069…
+    ## $ applicant                   <chr> "Raffaele & Associates DBA: Raffaele and A…
+    ## $ year                        <chr> "2017", "2017", "2017", "2017", "2017", "2…
+    ## $ applicant_address           <chr> "2642 East Hastings\r\nVancouver, BC  V5K …
+    ## $ property_use                <chr> "Dwelling Uses", "Dwelling Uses", "Dwellin…
+    ## $ specific_use_category       <chr> "One-Family Dwelling", "Multiple Dwelling"…
+    ## $ bi_id                       <dbl> 524, 535, 539, 541, 543, 546, 547, 548, 54…
 
 <!----------------------------------------------------------------------------->
 
@@ -158,13 +177,13 @@ analysis in the next four tasks:
 
 <!-------------------------- Start your work below ---------------------------->
 
-I already answered all four of my research questions before. I am going
-to choose two new questions.
+**I already answered all four of my research questions before. I am
+going to choose two new questions.**
 
-1.  How does the frequency of new building permits for uses other than
-    single family dwelling change between different year?
-2.  What is the median project value for new building permits for
-    single-family dwelling between different years?
+1.  **How does the frequency of new building permits for uses other than
+    single family dwelling change between different year?**
+2.  **What is the median project value for new building permits for
+    single-family dwelling between different years?**
 
 <!----------------------------------------------------------------------------->
 
@@ -172,14 +191,15 @@ Explain your choice.
 
 <!--------------------------- Start your work below --------------------------->
 
-In my first milestone, I found that the frequency of new building
+**In my first milestone, I found that the frequency of new building
 permits for single-family dwellings decreased over the years sampled. I
 am interested to see if this is true for new building permits for all
-purposes.
+purposes.**
 
-Since the frequency of new building permits for single-family dwellings
-is decreasing, I am interested to see how this compares to the value of
-the projects (do we have fewer but more expensive single family).
+**Since the frequency of new building permits for single-family
+dwellings is decreasing, I am interested to see how this compares to the
+value of the projects (do we have fewer but more expensive single
+family).**
 <!----------------------------------------------------------------------------->
 
 Now, try to choose a version of your data that you think will be
@@ -270,11 +290,12 @@ Now, choose two of the following tasks.
 
 <!-------------------------- Start your work below ---------------------------->
 
-**Task Number**: 1
+**Task Number**: **1**
 
-I am going to reorder the plot based on the median value of each permit
-type level - this allows me to better visualize which building permits
-have higher value (sorting the boxplots from highest to lowest)
+**I am going to reorder the plot based on the median value of each
+permit type level - this allows me to better visualize which building
+permits have higher value (sorting the boxplots from highest to
+lowest)**
 
 ``` r
 building_permits %>%
@@ -294,11 +315,11 @@ building_permits %>%
 <!----------------------------------------------------------------------------->
 <!-------------------------- Start your work below ---------------------------->
 
-**Task Number**: 2
+**Task Number**: **2**
 
-For this task, I am going to combine the “salvage and abatement” and
+**For this task, I am going to combine the “salvage and abatement” and
 “demolition and destruction” factors into one group, since they are very
-closely related in practice.
+closely related in practice.**
 
 ``` r
 building_permits %>%
@@ -375,12 +396,19 @@ filtered_building_permits %>%
 value_aov <- aov(project_value ~ year,
   data = single_family_new_buildings)
 
-summary(value_aov)
+value_aov
 ```
 
-    ##              Df    Sum Sq   Mean Sq F value Pr(>F)
-    ## year          1 2.480e+11 2.480e+11   0.761  0.383
-    ## Residuals   788 2.566e+14 3.257e+11
+    ## Call:
+    ##    aov(formula = project_value ~ year, data = single_family_new_buildings)
+    ## 
+    ## Terms:
+    ##                         year    Residuals
+    ## Sum of Squares  2.479618e+11 2.566173e+14
+    ## Deg. of Freedom            1          788
+    ## 
+    ## Residual standard error: 570663.2
+    ## Estimated effects may be unbalanced
 
 <!----------------------------------------------------------------------------->
 

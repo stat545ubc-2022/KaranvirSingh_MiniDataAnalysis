@@ -62,8 +62,8 @@ A reminder of the definition of *tidy* data:
 Based on the definition above, can you identify if your data is tidy or untidy? Go through all your columns, or if you have \>8 variables, just pick 8, and explain whether the data is untidy or tidy.
 
 <!--------------------------- Start your work below --------------------------->
-The data is tidy - each row is an observation and each column is a variable. Each cell is a value.
-<!----------------------------------------------------------------------------->
+
+**The data is tidy - each row is an observation and each column is a variable. Each cell is a value.** <!----------------------------------------------------------------------------->
 
 ### 2.2 (5 points)
 
@@ -74,21 +74,23 @@ If your data is untidy, then tidy it! Then, untidy it back to it's original stat
 Be sure to explain your reasoning for this task. Show us the "before" and "after".
 
 <!--------------------------- Start your work below --------------------------->
-I am going to untidy my data - to do this, I am going to combine two columns together (the applicant and the year). Now I have one column that contains two variables, which is untidy.
+
+**I am going to untidy my data - to do this, I am going to combine two columns together (the applicant and the year). Now I have one column that contains two variables, which is untidy.**
+
 ```{r}
 buildings_untidy <- building_permits %>% unite(col="applicant_year", c("applicant", "year"), sep="_")
 glimpse(buildings_untidy)
 ```
 
-To tidy it again, I am going to separate the two columns back into year and applicant.
+**To tidy it again, I am going to separate the two columns back into year and applicant.**
 
 ```{r}
 type_of_work_vector <- unique(building_permits$type_of_work)
 
 buildings_tidy <- buildings_untidy %>% separate(col="applicant_year", into=c("applicant", "year"), sep="_")
 
+glimpse(buildings_tidy)
 ```
-
 
 <!----------------------------------------------------------------------------->
 
@@ -98,24 +100,25 @@ Now, you should be more familiar with your data, and also have made progress in 
 
 <!-------------------------- Start your work below ---------------------------->
 
-I already answered all four of my research questions before. I am going to choose two new questions.
+**I already answered all four of my research questions before. I am going to choose two new questions.**
 
-1. How does the frequency of new building permits for uses other than single family dwelling change between different year?
-2. What is the median project value for new building permits for single-family dwelling between different years?
+1.  **How does the frequency of new building permits for uses other than single family dwelling change between different year?**
+2.  **What is the median project value for new building permits for single-family dwelling between different years?**
 
 <!----------------------------------------------------------------------------->
 
 Explain your choice.
 
 <!--------------------------- Start your work below --------------------------->
-In my first milestone, I found that the frequency of new building permits for single-family dwellings decreased over the years sampled. I am interested to see if this is true for new building permits for all purposes.
 
-Since the frequency of new building permits for single-family dwellings is decreasing, I am interested to see how this compares to the value of the projects (do we have fewer but more expensive single family).
-<!----------------------------------------------------------------------------->
+**In my first milestone, I found that the frequency of new building permits for single-family dwellings decreased over the years sampled. I am interested to see if this is true for new building permits for all purposes.**
+
+**Since the frequency of new building permits for single-family dwellings is decreasing, I am interested to see how this compares to the value of the projects (do we have fewer but more expensive single family).** <!----------------------------------------------------------------------------->
 
 Now, try to choose a version of your data that you think will be appropriate to answer these 2 questions. Use between 4 and 8 functions that we've covered so far (i.e. by filtering, cleaning, tidy'ing, dropping irrelevant columns, etc.).
 
 <!--------------------------- Start your work below --------------------------->
+
 ```{r}
 filtered_building_permits <- building_permits %>%
   filter(type_of_work == "New Building") %>% #Function 1
@@ -133,6 +136,7 @@ For this exercise, you'll be choosing two of the three tasks below -- both tasks
 But first, tasks 1 and 2 below ask you to modify a plot you made in a previous milestone. The plot you choose should involve plotting across at least three groups (whether by facetting, or using an aesthetic like colour). Place this plot below (you're allowed to modify the plot if you'd like). If you don't have such a plot, you'll need to make one. Place the code for your plot below.
 
 <!-------------------------- Start your work below ---------------------------->
+
 ```{r}
 building_permits %>%
   filter(project_value!=0) %>%
@@ -166,9 +170,9 @@ Now, choose two of the following tasks.
 
 <!-------------------------- Start your work below ---------------------------->
 
-**Task Number**: 1
+**Task Number**: **1**
 
-I am going to reorder the plot based on the median value of each permit type level - this allows me to better visualize which building permits have higher value (sorting the boxplots from highest to lowest)
+**I am going to reorder the plot based on the median value of each permit type level - this allows me to better visualize which building permits have higher value (sorting the boxplots from highest to lowest)**
 
 ```{r}
 building_permits %>%
@@ -183,14 +187,13 @@ building_permits %>%
   coord_flip()
 ```
 
-
 <!----------------------------------------------------------------------------->
 
 <!-------------------------- Start your work below ---------------------------->
 
-**Task Number**: 2
+**Task Number**: **2**
 
-For this task, I am going to combine the "salvage and abatement" and "demolition and destruction" factors into one group, since they are very closely related in practice.
+**For this task, I am going to combine the "salvage and abatement" and "demolition and destruction" factors into one group, since they are very closely related in practice.**
 
 ```{r}
 building_permits %>%
@@ -205,7 +208,6 @@ building_permits %>%
   ggtitle("Project value by permit type")+
   coord_flip()
 ```
-
 
 <!----------------------------------------------------------------------------->
 
@@ -250,7 +252,7 @@ filtered_building_permits %>%
 value_aov <- aov(project_value ~ year,
   data = single_family_new_buildings)
 
-summary(value_aov)
+value_aov
 ```
 
 <!----------------------------------------------------------------------------->
@@ -264,6 +266,7 @@ Produce something relevant from your fitted model: either predictions on Y, or a
 -   Obtain your results using the `broom` package if possible. If your model is not compatible with the broom function you're needing, then you can obtain your results by some other means, but first indicate which broom function is not compatible.
 
 <!-------------------------- Start your work below ---------------------------->
+
 I am going to output the p value usin the broom 'tidy' function. This is the last column in the tibble names p.value. The p.value for this test is 0.38, which suggests that there is not significant difference between the average project values across the 4 years sampled.
 
 ```{r}
@@ -284,6 +287,7 @@ Take a summary table that you made from Milestone 1 (Task 4.2), and write it as 
 -   **Reproducibility criteria**: You should be able to delete the csv file, and remake it simply by knitting this Rmd file.
 
 <!-------------------------- Start your work below ---------------------------->
+
 ```{r}
 permits_by_year <- building_permits %>%
   group_by(year, type_of_work) %>%
@@ -301,6 +305,7 @@ Write your model object from Task 3 to an R binary file (an RDS), and load it ag
 -   The same robustness and reproducibility criteria as in 3.1 apply here.
 
 <!-------------------------- Start your work below ---------------------------->
+
 ```{r}
 saveRDS(value_aov, here("output/value_aov.RDS"))
 value_aov <- readRDS(here("output", "value_aov.RDS"))
