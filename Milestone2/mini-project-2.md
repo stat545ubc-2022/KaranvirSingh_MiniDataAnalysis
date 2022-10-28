@@ -114,8 +114,10 @@ and “after”.
 <!--------------------------- Start your work below --------------------------->
 
 **I am going to untidy my data - to do this, I am going to combine two
-columns together (the applicant and the year). Now I have one column
-that contains two variables, which is untidy.**
+columns together (the applicant and the year). This could easily happen
+if during the data entry the two varibles were collected together and
+recorded together. Now I have one column that contains two variables,
+which is untidy.**
 
 ``` r
 buildings_untidy <- building_permits %>% unite(col="applicant_year", c("applicant", "year"), sep="_")
@@ -139,7 +141,7 @@ glimpse(buildings_untidy)
     ## $ bi_id                       <dbl> 524, 535, 539, 541, 543, 546, 547, 548, 54…
 
 **To tidy it again, I am going to separate the two columns back into
-year and applicant.**
+year and applicant. Now each column is a variable.**
 
 ``` r
 type_of_work_vector <- unique(building_permits$type_of_work)
@@ -198,8 +200,8 @@ purposes.**
 
 **Since the frequency of new building permits for single-family
 dwellings is decreasing, I am interested to see how this compares to the
-value of the projects (do we have fewer but more expensive single
-family).**
+value of the projects (do we have fewer but more expensive single family
+buildings?).**
 <!----------------------------------------------------------------------------->
 
 Now, try to choose a version of your data that you think will be
@@ -294,7 +296,7 @@ Now, choose two of the following tasks.
 
 **I am going to reorder the plot based on the median value of each
 permit type level - this allows me to better visualize which building
-permits have higher value (sorting the boxplots from highest to
+permits have higher overall value (sorting the boxplots from highest to
 lowest)**
 
 ``` r
@@ -319,8 +321,10 @@ building_permits %>%
 
 **For this task, I am going to combine the “salvage and abatement” and
 “demolition and destruction” factors into one group, since they are very
-closely related in practice. Now all entries in these two groups are
-plotted together under the same category (“Demolition”).**
+closely related in practice (ie. the difference between a building being
+demolished and being salvaged is not that significant). Now all entries
+in these two groups are plotted together under the same category
+(“Demolition”).**
 
 ``` r
 building_permits %>%
